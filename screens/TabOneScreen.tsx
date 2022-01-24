@@ -1,16 +1,47 @@
-import { StyleSheet } from 'react-native';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet,SafeAreaView } from 'react-native';
+import CountryItem from '../components/CountryItem';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+  const [countryName,setCountryName] = useState("India");
+  const [countryData, setCountryData] = useState({});
+  
+  const getCountryData = async () =>{
+
+    await axios.get('https://covid-api.mmediagroup.fr/v1/cases/',
+      {
+        params: {
+          country: countryName
+        }})
+    .then( (response)=> {
+      // handle success
+      console.log(response.data);
+      setCountryData(response.data.All);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+  }
+
+  useEffect(() => {
+    getCountryData();
+    
+  }, []);
+  
+
+  
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <CountryItem countryData={countryData}/>
+      
+    </SafeAreaView>
   );
 }
 
@@ -18,11 +49,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#24A19C"
+    
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: "#000"
   },
   separator: {
     marginVertical: 30,
