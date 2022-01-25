@@ -126,10 +126,12 @@ const styles = StyleSheet.create({
     countryInfo:{
         flexDirection: "row",
         padding: 10,
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+        alignItems: "center"
     },
     capitalContainer:{
-        padding: 5
+        padding: 5,
+        alignItems: "center"
     },
     heading:{
         fontSize: 23,
@@ -143,12 +145,14 @@ const styles = StyleSheet.create({
         color: "#fff"
     },
     populationContainer:{
-        padding: 5
+        padding: 5,
+        alignItems: "center"
     },
     statistics:{
         flexDirection: "row",
         padding: 10,
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+        alignItems: "center"
     },
     statisticsHeading:{
         color: "#000",

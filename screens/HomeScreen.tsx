@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet,SafeAreaView, FlatList,Text } from 'react-native';
+import { StyleSheet,SafeAreaView, FlatList,View } from 'react-native';
 import CountryItem from '../components/CountryItem';
 import StateItem from '../components/StateItem';
 import Colors from '../constants/Colors';
@@ -48,6 +48,7 @@ export default function HomeScreen() {
         renderItem={({item}) => <StateItem stateData={item}/>}
         keyExtractor={item=>item.loc}
         ListHeaderComponent={<CountryItem countryData={countryData}/>}
+        ListFooterComponent={<View style={{height: 20}}/>}
       />
      
       

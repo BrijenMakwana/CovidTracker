@@ -20,28 +20,28 @@ const StateItem = (props: StateItemProps) => {
         backgroundColor: Colors[colorScheme].lightTint
     }]}>
         {/* state name */}
-       <Text style={styles.stateName}>{props.stateData.loc}</Text>
+       <Text style={[styles.stateName,{color: "#24A19C"}]} allowFontScaling>{props.stateData.loc}</Text>
 
        
        <View style={styles.casesContainer}>
             {/* confirmed cases */}
             <View style={{alignItems: "center"}}>
                 <Text style={styles.heading}>Total Cases</Text>
-                <Text style={styles.stats}>{props.stateData.totalConfirmed}</Text>
+                <Text style={[styles.stats,{color: "#161853"}]}>{props.stateData.totalConfirmed}</Text>
             </View>
             
 
             { /* discharged */}
             <View style={{alignItems: "center"}}>
                 <Text style={styles.heading}>Recovered</Text>
-                <Text style={styles.stats}>{props.stateData.discharged}</Text>
+                <Text style={[styles.stats,{color: "#519259"}]}>{props.stateData.discharged}</Text>
             </View>
 
 
              {/* deaths */}
             <View style={{alignItems: "center"}}>
                 <Text style={styles.heading}>Deaths</Text>
-                <Text style={styles.stats}>{props.stateData.deaths}</Text>
+                <Text style={[styles.stats,{color: "#EC255A"}]}>{props.stateData.deaths}</Text>
             </View>
             
        </View>
@@ -61,11 +61,11 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 30,
         shadowOpacity: 0.5,
-        elevation: 0.5,
+        elevation: 7,
         shadowColor: "#000",
         shadowOffset:{
-            height: 5,
-            width: 5
+            height: 7,
+            width: 7
         },
         marginTop: 30,
         alignSelf: "center"
@@ -90,8 +90,7 @@ const styles = StyleSheet.create({
     },
     stats:{
         fontSize: 20,
-        fontWeight: "500",
-        color: "#fff",
+        fontWeight: "bold",
         marginTop: 10
     }
 });
