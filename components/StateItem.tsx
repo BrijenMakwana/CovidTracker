@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colors';
 
 export type StateItemProps = {
     stateData: {
@@ -11,8 +13,12 @@ export type StateItemProps = {
 }
 
 const StateItem = (props: StateItemProps) => {
+    const colorScheme = useColorScheme();
+    
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{
+        backgroundColor: Colors[colorScheme].lightTint
+    }]}>
         {/* state name */}
        <Text style={styles.stateName}>{props.stateData.loc}</Text>
 
@@ -51,7 +57,6 @@ export default StateItem;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#DB6B97",
         width: "90%",
         padding: 10,
         borderRadius: 30,

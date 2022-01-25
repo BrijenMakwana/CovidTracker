@@ -3,22 +3,24 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet,SafeAreaView, FlatList,Text } from 'react-native';
 import CountryItem from '../components/CountryItem';
 import StateItem from '../components/StateItem';
+import Colors from '../constants/Colors';
+import useColorScheme from '../hooks/useColorScheme';
 
-import { RootTabScreenProps } from '../types';
-
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function HomeScreen() {
   const [countryData, setCountryData] = useState({});
   const [stateData,setStateData] = useState();
+
+  const colorScheme = useColorScheme();
   
   
   const getIndiaData = async () =>{
 
    await axios.get('https://api.rootnet.in/covid19-in/stats/latest')
    .then( (response)=> {
-    //  console.log(response.data.data.summary);
+   
      setCountryData(response.data.data.summary)
      setStateData(response.data.data.regional)
-     console.log(stateData);
+     
    })
    .catch( (error)=> {
      // handle error
@@ -37,7 +39,9 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 
   
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container,{
+      backgroundColor: Colors[colorScheme].background
+    }]}>
       
       <FlatList
         data={stateData}
@@ -54,18 +58,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F2FFE9",
     width: "100%"
     
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: "#000"
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+  }
 });

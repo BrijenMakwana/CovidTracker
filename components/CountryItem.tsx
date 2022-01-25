@@ -1,5 +1,7 @@
-import { StyleSheet, Text, View,Image } from 'react-native';
+import { StyleSheet, Text, View,Image, Platform } from 'react-native';
 import React from 'react';
+import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colors';
 
 export type CountryItemProps = {
     countryData: {
@@ -10,9 +12,15 @@ export type CountryItemProps = {
     }
 }
 
+
+
 const CountryItem = (props: CountryItemProps) => {
+    const colorScheme = useColorScheme();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{
+        backgroundColor: Colors[colorScheme].tint
+    }]}>
 
         {/* contry name and flag */}
         <View style={styles.country}>
@@ -38,12 +46,12 @@ const CountryItem = (props: CountryItemProps) => {
             <View style={styles.capitalContainer}>
                  {/* capital city */}
                 <Text style={styles.heading}>Capital</Text>
-                <Text style={styles.capital}>Delhi</Text>
+                <Text style={styles.stats}>Delhi</Text>
             </View>
             <View style={styles.populationContainer}>
                 {/* population of the country */}
                 <Text style={styles.heading}>Total</Text>
-                <Text style={styles.population}>{props.countryData.total}</Text>
+                <Text style={styles.stats}>{props.countryData.total}</Text>
             </View>
 
             
@@ -84,7 +92,6 @@ export default CountryItem;
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: "#A6CF98",
         width: "90%",
         padding: 10,
         borderRadius: 30,
@@ -95,7 +102,8 @@ const styles = StyleSheet.create({
             height: 5,
             width: 5
         },
-        alignSelf: "center"
+        alignSelf: "center",
+        marginTop: Platform.OS === "android" ? 70 : 0
     },
     country:{
         flexDirection: "row",
@@ -128,7 +136,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#000"
     },
-    capital:{
+    stats:{
         fontSize: 20,
         marginTop: 8,
         fontWeight: "500",
@@ -136,12 +144,6 @@ const styles = StyleSheet.create({
     },
     populationContainer:{
         padding: 5
-    },
-    population:{
-        fontSize: 20,
-        marginTop: 8,
-        fontWeight: "500",
-        color: "#fff"
     },
     statistics:{
         flexDirection: "row",
