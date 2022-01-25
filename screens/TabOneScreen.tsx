@@ -1,37 +1,36 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet,SafeAreaView } from 'react-native';
+import { StyleSheet,SafeAreaView, FlatList,Text } from 'react-native';
 import CountryItem from '../components/CountryItem';
+import StateItem from '../components/StateItem';
 
 import { RootTabScreenProps } from '../types';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
-  const [countryName,setCountryName] = useState("India");
   const [countryData, setCountryData] = useState({});
+  const [stateData,setStateData] = useState();
   
-  const getCountryData = async () =>{
+  
+  const getIndiaData = async () =>{
 
-    await axios.get('https://covid-api.mmediagroup.fr/v1/cases/',
-      {
-        params: {
-          country: countryName
-        }})
-    .then( (response)=> {
-      // handle success
-      console.log(response.data);
-      setCountryData(response.data.All);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
-  }
+   await axios.get('https://api.rootnet.in/covid19-in/stats/latest')
+   .then( (response)=> {
+    //  console.log(response.data.data.summary);
+     setCountryData(response.data.data.summary)
+     setStateData(response.data.data.regional)
+     console.log(stateData);
+   })
+   .catch( (error)=> {
+     // handle error
+     console.log(error);
+   })
+   .then(function () {
+     // always executed
+   });
+ }
 
   useEffect(() => {
-    getCountryData();
+    getIndiaData();
     
   }, []);
   
@@ -39,7 +38,14 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   
   return (
     <SafeAreaView style={styles.container}>
-      <CountryItem countryData={countryData}/>
+      
+      <FlatList
+        data={stateData}
+        renderItem={({item}) => <StateItem stateData={item}/>}
+        keyExtractor={item=>item.loc}
+        ListHeaderComponent={<CountryItem countryData={countryData}/>}
+      />
+     
       
     </SafeAreaView>
   );
@@ -48,8 +54,8 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: "#24A19C"
+    backgroundColor: "#F2FFE9",
+    width: "100%"
     
   },
   title: {

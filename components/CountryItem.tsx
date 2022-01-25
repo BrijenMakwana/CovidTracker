@@ -3,15 +3,10 @@ import React from 'react';
 
 export type CountryItemProps = {
     countryData: {
-        capital_city: string;
-        confirmed: number;
-        continent: string;
-        country: string;
-        abbreviation: string;
+        confirmedCasesIndian: number;
         deaths: number;
-        population: number;
-        recovered: number;
-        updated: string; 
+        total: number;
+        discharged: number;
     }
 }
 
@@ -24,14 +19,14 @@ const CountryItem = (props: CountryItemProps) => {
             
             <Image
                 source={{
-                    uri: `https://flagcdn.com/40x30/${(props.countryData.abbreviation).toLocaleLowerCase()}.png`
+                    uri: 'https://flagcdn.com/40x30/in.png'
                 }}
                 style={styles.flagImage}
             />
             <View style={styles.continent}>
-                <Text style={styles.countryName}>{props.countryData.country}</Text>
+                <Text style={styles.countryName}>India</Text>
                 {/* country continent */}
-                <Text>{props.countryData.continent}</Text>
+                <Text>Asia</Text>
             </View>
             
         </View>
@@ -43,12 +38,12 @@ const CountryItem = (props: CountryItemProps) => {
             <View style={styles.capitalContainer}>
                  {/* capital city */}
                 <Text style={styles.heading}>Capital</Text>
-                <Text style={styles.capital}>{props.countryData.capital_city}</Text>
+                <Text style={styles.capital}>Delhi</Text>
             </View>
             <View style={styles.populationContainer}>
                 {/* population of the country */}
-                <Text style={styles.heading}>Population</Text>
-                <Text style={styles.population}>{props.countryData.population}</Text>
+                <Text style={styles.heading}>Total</Text>
+                <Text style={styles.population}>{props.countryData.total}</Text>
             </View>
 
             
@@ -59,7 +54,7 @@ const CountryItem = (props: CountryItemProps) => {
             {/* confirmed covid cases */}
             <View style={{padding: 5,alignItems: "center"}}>
                 <Text style={styles.statisticsHeading}>Total Cases</Text>
-                <Text style={styles.statisticsInfo}>{props.countryData.confirmed}</Text>
+                <Text style={styles.statisticsInfo}>{props.countryData.confirmedCasesIndian}</Text>
             </View>
            
 
@@ -73,7 +68,7 @@ const CountryItem = (props: CountryItemProps) => {
             {/* total recovered */}
             <View style={{padding: 5,alignItems: "center"}}>
                 <Text style={styles.statisticsHeading}>Recovered</Text>
-                <Text style={styles.statisticsInfo}>{props.countryData.recovered}</Text>
+                <Text style={styles.statisticsInfo}>{props.countryData.discharged}</Text>
             </View>
             
         </View>
@@ -89,7 +84,7 @@ export default CountryItem;
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: "#FAEEE7",
+        backgroundColor: "#A6CF98",
         width: "90%",
         padding: 10,
         borderRadius: 30,
@@ -99,7 +94,8 @@ const styles = StyleSheet.create({
         shadowOffset:{
             height: 5,
             width: 5
-        }
+        },
+        alignSelf: "center"
     },
     country:{
         flexDirection: "row",
@@ -116,7 +112,7 @@ const styles = StyleSheet.create({
     },
     countryName:{
         fontSize: 30,
-        color: "#325288",
+        color: "#000",
         fontWeight: "bold"
     },
     countryInfo:{
@@ -130,13 +126,13 @@ const styles = StyleSheet.create({
     heading:{
         fontSize: 23,
         fontWeight: "bold",
-        color: "#24A19C"
+        color: "#000"
     },
     capital:{
         fontSize: 20,
         marginTop: 8,
         fontWeight: "500",
-        color: "#D96098"
+        color: "#fff"
     },
     populationContainer:{
         padding: 5
@@ -145,7 +141,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: 8,
         fontWeight: "500",
-        color: "#D96098"
+        color: "#fff"
     },
     statistics:{
         flexDirection: "row",
@@ -153,12 +149,12 @@ const styles = StyleSheet.create({
         justifyContent: "space-around"
     },
     statisticsHeading:{
-        color: "#24A19C",
+        color: "#000",
         fontSize: 16,
         fontWeight: "bold"
     },
     statisticsInfo:{
-        color: "#D96098",
+        color: "#fff",
         fontSize: 16,
         fontWeight: "500",
         marginTop: 8
