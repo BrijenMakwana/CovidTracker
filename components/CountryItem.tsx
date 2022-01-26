@@ -21,7 +21,7 @@ const CountryItem = (props: CountryItemProps) => {
     <View style={[styles.container,{
         backgroundColor: Colors[colorScheme].tint
     }]}>
-
+          
         {/* contry name and flag */}
         <View style={styles.country}>
             
@@ -50,8 +50,8 @@ const CountryItem = (props: CountryItemProps) => {
             </View>
             <View style={styles.populationContainer}>
                 {/* population of the country */}
-                <Text style={styles.heading}>Total</Text>
-                <Text style={styles.stats}>{props.countryData.total}</Text>
+                <Text style={styles.heading}>Population</Text>
+                <Text style={styles.stats}>138 Crores</Text>
             </View>
 
             
