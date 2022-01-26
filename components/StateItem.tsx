@@ -20,7 +20,7 @@ const StateItem = (props: StateItemProps) => {
         backgroundColor: Colors[colorScheme].lightTint
     }]}>
         {/* state name */}
-       <Text style={[styles.stateName,{color: "#24A19C"}]} allowFontScaling>{props.stateData.loc}</Text>
+       <Text style={[styles.stateName,{color: Colors[colorScheme].tint}]} allowFontScaling>{props.stateData.loc}</Text>
 
        
        <View style={styles.casesContainer}>
