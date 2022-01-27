@@ -7,21 +7,25 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 
 export default function HomeScreen() {
+  // storing country covid data
   const [countryData, setCountryData] = useState({});
+  // storing states covid data
   const [stateData,setStateData] = useState();
+  // if user refresh or not
   const [refreshing,setRefreshing] = useState(false);
 
   const colorScheme = useColorScheme();
   
-  
+  // get data from the API
   const getIndiaData = async () =>{
 
    await axios.get('https://api.rootnet.in/covid19-in/stats/latest')
    .then( (response)=> {
    
+    // set data about India
      setCountryData(response.data.data.summary)
+    //  set data about states
      setStateData(response.data.data.regional)
-     console.log(response.data);
      
    })
    .catch( (error)=> {
@@ -33,14 +37,19 @@ export default function HomeScreen() {
    });
  }
 
+//  call the function only once when user open the app
   useEffect(() => {
     getIndiaData();
     
   }, []);
   
+  // call the function when user pull to refresh
   const onRefresh = () => {
+    // call the API again for updated data
     getIndiaData();
+    // set refreshing true
     setRefreshing(true);
+    // set refreshing to false after specified seconds
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
@@ -51,10 +60,12 @@ export default function HomeScreen() {
     <SafeAreaView style={[styles.container,{
       backgroundColor: Colors[colorScheme].background
     }]}>
+      {/* list of states */}
       <FlatList
         data={stateData}
         renderItem={({item}) => <StateItem stateData={item}/>}
         keyExtractor={item=>item.loc}
+        // country data as a header component
         ListHeaderComponent={<CountryItem countryData={countryData}/>}
         ListFooterComponent={<View style={styles.bottomComponent}/>}
         refreshControl={

@@ -20,10 +20,12 @@ const StateItem = (props: StateItemProps) => {
         backgroundColor: Colors[colorScheme].lightTint
     }]}>
         {/* state name */}
-       <Text style={[styles.stateName,{color: Colors[colorScheme].tint}]} allowFontScaling>{props.stateData.loc}</Text>
+        <Text style={[styles.stateName,{color: Colors[colorScheme].tint}]} allowFontScaling>
+            {props.stateData.loc}
+        </Text>
 
        
-       <View style={styles.casesContainer}>
+        <View style={styles.casesContainer}>
             {/* confirmed cases */}
             <View style={{alignItems: "center"}}>
                 <Text style={styles.heading}>Total Cases</Text>
