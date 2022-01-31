@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "India Covid Tracker",
-    "slug": "India Covid Tracker",
+    "slug": "IndiaCovidTracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

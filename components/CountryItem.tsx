@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
             width: 5
         },
         alignSelf: "center",
-        marginTop: Platform.OS === "android" ? 70 : 0
+        marginTop: Platform.OS === "android" ? 20 : 0
     },
     country:{
         flexDirection: "row",

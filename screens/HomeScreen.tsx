@@ -1,6 +1,7 @@
 import axios from 'axios';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet,SafeAreaView, FlatList,View, RefreshControl,Image } from 'react-native';
+import { StyleSheet,SafeAreaView, FlatList,View, RefreshControl,Text } from 'react-native';
 import CountryItem from '../components/CountryItem';
 import StateItem from '../components/StateItem';
 import Colors from '../constants/Colors';
@@ -66,7 +67,19 @@ export default function HomeScreen() {
         renderItem={({item}) => <StateItem stateData={item}/>}
         keyExtractor={item=>item.loc}
         // country data as a header component
-        ListHeaderComponent={<CountryItem countryData={countryData}/>}
+        ListHeaderComponent={
+          <View style={styles.headerComponent}>
+            <Text 
+              style={[styles.date,{
+                color: Colors[colorScheme].tint
+              }]}
+            >
+              {moment(new Date()).format("Do MMM YYYY")}
+            </Text>
+            <CountryItem countryData={countryData}/>
+          </View>
+        
+      }
         ListFooterComponent={<View style={styles.bottomComponent}/>}
         refreshControl={
           <RefreshControl
@@ -89,6 +102,14 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%"
     
+  },
+  headerComponent:{
+    marginTop: 50,
+    alignItems: "center"
+  },
+  date:{
+    fontSize: 25,
+    fontWeight: "bold"
   },
   bottomComponent:{
     height: 30
